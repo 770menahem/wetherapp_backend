@@ -4,6 +4,7 @@ import { Server } from 'http';
 import * as logger from 'morgan';
 import IRouter from './routers/router.interface';
 import { errorMiddleware } from './utils/error';
+import checkConnections from './utils/checkConnections';
 
 require('dotenv').config();
 

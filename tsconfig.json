@@ -20,5 +20,6 @@
     "outDir": "./dist/",
     "lib": ["ES2020.Promise"]
   },
+  "files": ["./src/infra/express/config/req.d.ts"],
   "include": ["src/**/*"]
 }
