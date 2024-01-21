@@ -6,7 +6,7 @@ export abstract class BaseRepository<T> {
 
     constructor(db: Connection, modelName: string, schema: Schema<T>) {
         if (db.modelNames().includes(modelName)) {
-            this._model = db.model(modelName);
+            this._model = db.model(modelName) as Model<T>;
         } else {
             this._model = db.model<T>(modelName, schema);
         }
@@ -37,8 +37,9 @@ export abstract class BaseRepository<T> {
         return resDelete;
     }
 
-    async getAll(): Promise<T[]> {
-        let items: T[] = await this._model.find().lean();
+    // get all items with optional pagination
+    async getAll(pagination?: any): Promise<T[]> {
+        let items: T[] = await this._model.find({}, null, pagination).lean();
         return items;
     }
 
