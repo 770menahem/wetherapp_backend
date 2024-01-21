@@ -9,6 +9,13 @@ export class ServiceError extends Error {
     }
 }
 
+// not found error
+export class NotFoundError extends ServiceError {
+    constructor(message: string) {
+        super(404, message);
+    }
+}
+
 /**
  * Error middleware, handles the error by the status code.
  * @param { Error } error - The error

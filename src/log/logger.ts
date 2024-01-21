@@ -1,7 +1,5 @@
 type logObject = {
     message: string;
-    system?: string;
-    service?: string;
     extraFields?: any;
 };
 
