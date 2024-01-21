@@ -15,6 +15,11 @@ import { photoSchema } from './infra/mongo/models/photo.model';
 import { PhotoService } from './services/photo.service';
 import { PhotoController } from './infra/express/controllers/photo.controller';
 import PhotoRouter from './infra/express/routers/photo.route';
+import { CommentsRepo } from './infra/mongo/repo/comment.repo';
+import { CommentService } from './services/comment.service';
+import { CommentController } from './infra/express/controllers/comment.controller';
+import CommentRouter from './infra/express/routers/comment.route';
+import { commentSchema } from './infra/mongo/models/comment.model';
 
 export function initializeApp(port: any) {
     const logger = new Logger();
@@ -30,5 +35,10 @@ export function initializeApp(port: any) {
     const photoController = new PhotoController(photoService);
     const photoRouter = new PhotoRouter(photoController, auth.check);
 
-    return new App(port, [userRouter, photoRouter]);
+    const commentRepo = new CommentsRepo(conn, config.mongo.commentCollectionName, commentSchema);
+    const commentService = new CommentService(commentRepo, logger);
+    const commentController = new CommentController(commentService);
+    const commentRouter = new CommentRouter(commentController, auth.check);
+
+    return new App(port, [userRouter, photoRouter, commentRouter]);
 }
