@@ -11,14 +11,15 @@ export class PhotoController implements IPhotoController {
     }
 
     async createPhoto(req: Request, res: Response): Promise<void> {
+        const userId = req.userId!;
         const { photo, description } = req.body;
 
-        const newPhoto = await this.PhotoService.createPhoto({ photo, description });
+        const newPhoto = await this.PhotoService.createPhoto({ photo, description, userId });
         res.status(201).json(newPhoto);
     }
 
     async getPhotosByUserId(req: Request, res: Response): Promise<void> {
-        const { userId } = req.params;
+        const userId = req.userId!;
         const page: number = +req.query.page!;
         const limit: number = +req.query.limit!;
 

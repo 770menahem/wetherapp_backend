@@ -4,6 +4,7 @@ import { paginatedSchema } from './global.schema';
 export type createPhotoDTO = {
     photo: string; // base64
     description: string;
+    userId: string;
 };
 
 export const createPhotoSchema = Joi.object({
@@ -18,9 +19,3 @@ export const updatePhotoSchema = Joi.object({
         description: Joi.string().required(),
     },
 });
-
-export const photosByUserIdSchema = Joi.object({
-    params: {
-        userId: Joi.string().required(),
-    },
-}).concat(paginatedSchema);
