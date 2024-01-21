@@ -7,12 +7,20 @@ export type createPhotoDTO = {
     userId: string;
 };
 
-export const createPhotoSchema = Joi.object({
-    body: {
-        photo: Joi.string().required(),
-        description: Joi.string().required(),
-    },
-});
+// export const createPhotoSchema = Joi.object({
+//     files: Joi.array()
+//         .items(
+//             Joi.object({
+//                 fieldname: 'image',
+//             }).unknown(true),
+//         )
+//         .min(1)
+//         .max(1)
+//         .required(),
+//     body: {
+//         description: Joi.string().required(),
+//     },
+// });
 
 export const updatePhotoSchema = Joi.object({
     body: {

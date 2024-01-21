@@ -3,7 +3,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as multer from 'multer';
 
-const upload = multer({
+const mul = multer({
     storage: multer.diskStorage({
         destination: function (_req, _file, cb) {
             cb(null, './uploads/photos');
@@ -12,7 +12,9 @@ const upload = multer({
             cb(null, Date.now() + '-' + file.originalname);
         },
     }),
-}).single('image');
+});
+
+const upload = mul.single('image');
 
 export const uploadPhoto = async (req: Request, res: Response, next: NextFunction) => {
     upload(req, res, function (err) {
