@@ -1,8 +1,8 @@
 import * as Joi from 'joi';
-import { paginatedSchema } from './global.schema';
 
 export type createPhotoDTO = {
-    photo: string; // base64
+    path: string;
+    photoName: string;
     description: string;
     userId: string;
 };

@@ -12,9 +12,9 @@ export class PhotoController implements IPhotoController {
 
     createPhoto = async (req: Request, res: Response): Promise<void> => {
         const userId = req.userId!;
-        const { photo, description } = req.body;
+        const { photo, description, photoName } = req.body;
 
-        const newPhoto = await this.PhotoService.createPhoto({ photo, description, userId });
+        const newPhoto = await this.PhotoService.createPhoto({ photoName, path: photo, description, userId });
         res.status(201).json(newPhoto);
     };
 
@@ -26,6 +26,7 @@ export class PhotoController implements IPhotoController {
         const photos = await this.PhotoService.getPhotosByUserId(userId, { page, limit });
         res.status(200).json(photos);
     };
+
     getAllPhotosPaginated = async (req: Request, res: Response): Promise<void> => {
         const page: number = +req.query.page!;
         const limit: number = +req.query.limit!;
@@ -33,12 +34,15 @@ export class PhotoController implements IPhotoController {
         const photos = await this.PhotoService.getAllPhotosPaginated({ page, limit });
         res.status(200).json(photos);
     };
+
     getPhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
 
         const photo = await this.PhotoService.getPhotoById(photoId);
-        res.status(200).json(photo);
+
+        res.download(photo.path);
     };
+
     updatePhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
         const { description } = req.body;
@@ -46,6 +50,7 @@ export class PhotoController implements IPhotoController {
         const updatedPhoto = await this.PhotoService.updatePhotoById(photoId, description);
         res.status(200).json(updatedPhoto);
     };
+
     deletePhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
 

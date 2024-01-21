@@ -1,6 +1,7 @@
 export type Photo = {
     _id?: string;
-    photo: string; // base64
+    path: string;
+    photoName: string;
     description: string;
     userId: string;
     createdAt?: Date;
