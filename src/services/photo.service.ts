@@ -60,8 +60,8 @@ export class PhotoService implements IPhotoService {
 
         return photo;
     };
-    updatePhotoById = async (photoId: string, description: string): Promise<Photo> => {
-        const updatedPhoto = await this.PhotoRepo.updateDescription(photoId, description);
+    updatePhotoById = async (photoId: string, description: string, userId: string): Promise<Photo> => {
+        const updatedPhoto = await this.PhotoRepo.updateDescription(photoId, description, userId);
 
         if (!updatedPhoto) {
             this._logger.logError({ message: `Photo not found: ${photoId}` });

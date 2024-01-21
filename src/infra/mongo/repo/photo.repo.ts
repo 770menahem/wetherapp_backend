@@ -4,8 +4,17 @@ import { BaseRepository } from './baseRepository';
 import { Pagination } from '../../../types/pagination';
 
 export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
-    updateDescription = async (PhotoId: string, description: string): Promise<Photo | null> => {
-        const updatedPhoto = await this._model.findByIdAndUpdate(PhotoId, { description }, { new: true }).lean();
+    updateDescription = async (photoId: string, description: string, userId: string): Promise<Photo | null> => {
+        const updatedPhoto = await this._model
+            .findByIdAndUpdate(
+                {
+                    _id: photoId,
+                    userId,
+                },
+                { description },
+                { new: true },
+            )
+            .lean();
 
         return updatedPhoto;
     };

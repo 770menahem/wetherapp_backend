@@ -46,8 +46,9 @@ export class PhotoController implements IPhotoController {
     updatePhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
         const { description } = req.body;
+        const userId = req.userId!;
 
-        const updatedPhoto = await this.PhotoService.updatePhotoById(photoId, description);
+        const updatedPhoto = await this.PhotoService.updatePhotoById(photoId, description, userId);
         res.status(200).json(updatedPhoto);
     };
 
