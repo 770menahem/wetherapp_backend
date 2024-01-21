@@ -11,7 +11,7 @@ class AuthMock implements IAuth {
     public check = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const token: string = req.header('Authorization') as string;
-            const userId = this.checkAuth(token);
+            const userId = await this.checkAuth(token);
             if (!userId) {
                 res.status(401).send({ error: 'unauthorized', status: 401 });
             } else {

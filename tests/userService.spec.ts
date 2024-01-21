@@ -1,5 +1,5 @@
 import Logger from '../src/infra/winston/logger';
-import { IUserService } from '../src/interfaces/services/userService.interface';
+import { IUserService } from '../src/services/interfaces/services/userService.interface';
 import { UserService } from '../src/services/user.service';
 import User from '../src/types/user.type';
 
