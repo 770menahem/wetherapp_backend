@@ -1,14 +1,16 @@
 [
-  "POST users/login",
-  "POST users",
-  "GET users",
-  "GET users/:userId",
-  "PUT users/:userId",
-  "DELETE users/:userId",
-  "GET blogs",
-  "GET blogs/:blogId",
-  "POST blogs",
-  "PUT blogs/:blogId",
-  "DELETE blogs/:blogId",
-  "GET blogs/author/:userName"
+  "POST api/users/login",
+  "POST api/users",
+  "GET api/users",
+  "GET api/users/:userId",
+  "PUT api/users/:userId",
+  "DELETE api/users/:userId",
+  "POST api/photos",
+  "GET api/photos/my",
+  "GET api/photos",
+  "GET api/photos/:photoId",
+  "PUT api/photos/:photoId",
+  "DELETE api/photos/:photoId",
+  "GET api/comments/:photoId",
+  "POST api/comments"
 ]

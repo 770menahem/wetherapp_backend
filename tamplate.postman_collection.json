@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "e23f1816-02a6-4592-ae58-4a8ab7f27c80",
 		"name": "tamplate",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19275940"
 	},
 	"item": [
 		{
@@ -194,7 +195,7 @@
 			]
 		},
 		{
-			"name": "blog",
+			"name": "photo",
 			"item": [
 				{
 					"name": "all",
@@ -208,20 +209,29 @@
 							}
 						],
 						"url": {
-							"raw": "{{beckendUrl}}/blogs/",
+							"raw": "{{beckendUrl}}/photos?page=1&limit=10",
 							"host": [
 								"{{beckendUrl}}"
 							],
 							"path": [
-								"blogs",
-								""
+								"photos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "create blog",
+					"name": "create photo",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -241,20 +251,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{beckendUrl}}/blogs/",
+							"raw": "{{beckendUrl}}/photos",
 							"host": [
 								"{{beckendUrl}}"
 							],
 							"path": [
-								"blogs",
-								""
+								"photos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "by blogId",
+					"name": "users photos",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -265,18 +274,22 @@
 							}
 						],
 						"url": {
-							"raw": "{{beckendUrl}}/blogs/:blogId",
+							"raw": "{{beckendUrl}}/photos/my?page=1&limit=10",
 							"host": [
 								"{{beckendUrl}}"
 							],
 							"path": [
-								"blogs",
-								":blogId"
+								"photos",
+								"my"
 							],
-							"variable": [
+							"query": [
 								{
-									"key": "blogId",
-									"value": "62b9eacaa4fea9089c7a5f45"
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
 								}
 							]
 						}
@@ -284,7 +297,37 @@
 					"response": []
 				},
 				{
-					"name": "update blog",
+					"name": "photo by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{beckendUrl}}/photos/:photoId",
+							"host": [
+								"{{beckendUrl}}"
+							],
+							"path": [
+								"photos",
+								":photoId"
+							],
+							"variable": [
+								{
+									"key": "photoId",
+									"value": "dadsdfda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update photo desc",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -304,18 +347,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{beckendUrl}}/blogs/:blogId",
+							"raw": "{{beckendUrl}}/photos/:photoId",
 							"host": [
 								"{{beckendUrl}}"
 							],
 							"path": [
-								"blogs",
-								":blogId"
+								"photos",
+								":photoId"
 							],
 							"variable": [
 								{
-									"key": "blogId",
-									"value": "62b9eacaa4fea9089c7a5f45"
+									"key": "photoId",
+									"value": ""
 								}
 							]
 						}
@@ -323,7 +366,7 @@
 					"response": []
 				},
 				{
-					"name": "delete blog",
+					"name": "delete photo",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -334,19 +377,89 @@
 							}
 						],
 						"url": {
-							"raw": "{{beckendUrl}}/blogs/:blogId",
+							"raw": "{{beckendUrl}}/photos/:photoId",
 							"host": [
 								"{{beckendUrl}}"
 							],
 							"path": [
-								"blogs",
-								":blogId"
+								"photos",
+								":photoId"
 							],
 							"variable": [
 								{
-									"key": "blogId",
-									"value": "62bd29f4ce0bea91b529cdde"
+									"key": "photoId",
+									"value": ""
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{beckendUrl}}/photos?page=1&limit=10",
+							"host": [
+								"{{beckendUrl}}"
+							],
+							"path": [
+								"photos"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"2\",\n    \"description\":\"ab\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{beckendUrl}}/photos",
+							"host": [
+								"{{beckendUrl}}"
+							],
+							"path": [
+								"photos"
 							]
 						}
 					},
