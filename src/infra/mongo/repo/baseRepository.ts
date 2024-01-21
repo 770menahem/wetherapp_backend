@@ -38,8 +38,8 @@ export abstract class BaseRepository<T> {
     }
 
     // get all items with optional pagination
-    async getAll(pagination?: any): Promise<T[]> {
-        let items: T[] = await this._model.find({}, null, pagination).lean();
+    async getAll(pagination?: any, populate?: any): Promise<T[]> {
+        let items: T[] = await this._model.find({}, null, pagination).populate(populate).lean();
         return items;
     }
 

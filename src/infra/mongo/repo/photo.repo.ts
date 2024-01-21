@@ -4,6 +4,17 @@ import { BaseRepository } from './baseRepository';
 import { Pagination } from '../../../types/pagination';
 
 export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
+    getPhotos = async (pagination: Pagination): Promise<Photo[]> => {
+        const photos = await this._model
+            .find({})
+            .skip((pagination.page - 1) * pagination.limit)
+            .limit(pagination.limit)
+            .populate('userId')
+            .lean();
+
+        return photos;
+    };
+
     updateDescription = async (photoId: string, description: string, userId: string): Promise<Photo | null> => {
         const updatedPhoto = await this._model
             .findByIdAndUpdate(
@@ -31,7 +42,12 @@ export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
         return Photo;
     };
     getUsersPhotos = async (userId: string, pagination: Pagination): Promise<Photo[]> => {
-        const photos = await this._model.find({ userId }, null, pagination).lean();
+        const photos = await this._model
+            .find({ userId })
+            .skip((pagination.page - 1) * pagination.limit)
+            .limit(pagination.limit)
+            .populate('userId')
+            .lean();
 
         return photos;
     };

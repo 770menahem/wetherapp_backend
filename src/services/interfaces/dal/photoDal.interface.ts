@@ -6,6 +6,6 @@ export interface IPhotoDal {
     updateDescription(photoId: string, description: string, userId: string): Promise<Photo | null>;
     delete(photoId: string): Promise<Photo | null>;
     getById(photoId: string): Promise<Photo | null>;
-    getAll(pagination: Pagination): Promise<Photo[]>;
+    getPhotos(pagination: Pagination): Promise<Photo[]>;
     getUsersPhotos(userId: string, pagination: Pagination): Promise<Photo[]>;
 }

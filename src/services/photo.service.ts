@@ -39,7 +39,7 @@ export class PhotoService implements IPhotoService {
     };
 
     getAllPhotosPaginated = async (paginated: Pagination): Promise<Photo[]> => {
-        const photos = await this.PhotoRepo.getAll(paginated);
+        const photos = await this.PhotoRepo.getPhotos(paginated);
 
         this._logger.logInfo({ message: `Photos retrieved`, extraFields: { photosCount: photos?.length } });
 

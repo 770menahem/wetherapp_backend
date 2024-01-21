@@ -4,7 +4,7 @@ import { BaseRepository } from './baseRepository';
 
 export class CommentsRepo extends BaseRepository<Comment> implements ICommentDal {
     getAllPhotoComments = async (photoId: string) => {
-        return await this._model.find({ photoId });
+        return await this._model.find({ photoId }).populate('userId').lean();
     };
 
     createComment = async (comment: Comment) => {
