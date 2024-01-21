@@ -6,11 +6,42 @@ import { Pagination } from '../../../types/pagination';
 export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
     getPhotos = async (pagination: Pagination): Promise<Photo[]> => {
         const photos = await this._model
-            .find({})
+            .aggregate([
+                {
+                    $lookup: {
+                        from: 'comments',
+                        localField: '_id',
+                        foreignField: 'photoId',
+                        as: 'comments',
+                    },
+                },
+                {
+                    $addFields: {
+                        commentCount: { $size: '$comments' },
+                    },
+                },
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'userId',
+                        foreignField: '_id',
+                        as: 'user',
+                    },
+                },
+                {
+                    $addFields: {
+                        user: { $arrayElemAt: ['$user', 0] },
+                    },
+                },
+                {
+                    $project: {
+                        comments: 0,
+                        userId: 0,
+                    },
+                },
+            ])
             .skip((pagination.page - 1) * pagination.limit)
-            .limit(pagination.limit)
-            .populate('userId')
-            .lean();
+            .limit(pagination.limit);
 
         return photos;
     };
@@ -43,11 +74,33 @@ export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
     };
     getUsersPhotos = async (userId: string, pagination: Pagination): Promise<Photo[]> => {
         const photos = await this._model
-            .find({ userId })
+            .aggregate([
+                {
+                    $match: {
+                        userId: userId,
+                    },
+                },
+                {
+                    $lookup: {
+                        from: 'comments',
+                        localField: '_id',
+                        foreignField: 'photoId',
+                        as: 'comments',
+                    },
+                },
+                {
+                    $addFields: {
+                        commentCount: { $size: '$comments' },
+                    },
+                },
+                {
+                    $project: {
+                        comments: 0, // exclude comments array from output
+                    },
+                },
+            ])
             .skip((pagination.page - 1) * pagination.limit)
-            .limit(pagination.limit)
-            .populate('userId')
-            .lean();
+            .limit(pagination.limit);
 
         return photos;
     };

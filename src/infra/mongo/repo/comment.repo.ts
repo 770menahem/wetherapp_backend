@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { ICommentDal } from '../../../services/interfaces/dal/commentDal.interface';
 import Comment from '../../../types/comment.type';
 import { BaseRepository } from './baseRepository';
@@ -8,6 +9,9 @@ export class CommentsRepo extends BaseRepository<Comment> implements ICommentDal
     };
 
     createComment = async (comment: Comment) => {
-        return await this._model.create(comment);
+        return await this._model.create({
+            ...comment,
+            photoId: new Types.ObjectId(comment.photoId),
+        });
     };
 }

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import config from '../../../config/config';
 
 export const photoSchema = new mongoose.Schema(
@@ -6,7 +6,7 @@ export const photoSchema = new mongoose.Schema(
         description: { type: String, required: false },
         path: { type: String, required: true },
         photoName: { type: String, required: true },
-        userId: { type: String, required: true, ref: config.mongo.userCollectionName },
+        userId: { type: Types.ObjectId, required: true, ref: config.mongo.userCollectionName },
     },
     {
         timestamps: true,
