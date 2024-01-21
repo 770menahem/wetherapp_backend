@@ -18,7 +18,7 @@ class Auth implements IAuth {
             if (!userId) {
                 res.status(401).send({ error: 'unauthorized', status: 401 });
             } else {
-                req['userId'] = userId;
+                req.userId = userId;
                 next();
             }
         } catch (error) {

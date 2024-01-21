@@ -1,39 +1,41 @@
 import mongoose from 'mongoose';
-import { IUserDal } from '../../../interfaces/DAL/userDal.interface';
+import { IUserDal } from '../../../services/interfaces/dal/userDal.interface';
 
 import User from '../../../types/user.type';
 import { BaseRepository } from './baseRepository';
 
 export class UserRepo extends BaseRepository<User> implements IUserDal {
-    private UserModel: mongoose.Model<User>;
+    constructor(conn: mongoose.Connection, collectionName: string, schema: mongoose.Schema) {
+        super(conn, collectionName, schema);
+    }
 
     public getById = async (userId: string): Promise<User | null> => {
-        const user = await this.UserModel.findById(userId, { password: 0 });
+        const user = await this._model.findById(userId, { password: 0 });
         return user;
     };
 
     public create = async (user: User): Promise<User> => {
-        const newUser = await this.UserModel.create(user);
+        const newUser = await this._model.create(user);
         return newUser;
     };
 
     public updateName = async (userId: string, name: string): Promise<User | null> => {
-        const user = await this.UserModel.findByIdAndUpdate(userId, { name }, { new: true });
+        const user = await this._model.findByIdAndUpdate(userId, { name }, { new: true });
         return user;
     };
 
     public delete = async (userId: string): Promise<User | null> => {
-        const user = await this.UserModel.findByIdAndDelete({ _id: userId });
+        const user = await this._model.findByIdAndDelete({ _id: userId });
         return user;
     };
 
     public get = async (userId: string): Promise<User | null> => {
-        const user = await this.UserModel.findById(userId, { password: 0 });
+        const user = await this._model.findById(userId, { password: 0 });
         return user;
     };
 
     public getByNameAndPassword = async (name: string, password: string): Promise<User | null> => {
-        const user = await this.UserModel.findOne({ name, password }, { password: 0 });
+        const user = await this._model.findOne({ name, password }, { password: 0 });
         return user;
     };
 }

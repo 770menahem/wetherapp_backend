@@ -1,8 +1,8 @@
 import { verify } from 'jsonwebtoken';
 import { generateToken } from '../auth/token';
 import config from '../config/config';
-import { IUserDal } from '../interfaces/DAL/userDal.interface';
-import { IUserService } from '../interfaces/services/userService.interface';
+import { IUserDal } from './interfaces/dal/userDal.interface';
+import { IUserService } from './interfaces/services/userService.interface';
 import { ILogger } from '../log/logger';
 import User from '../types/user.type';
 import { decrypt, encrypt } from '../utils/encrypt';

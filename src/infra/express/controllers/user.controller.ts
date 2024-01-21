@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IUserService } from '../../../interfaces/services/userService.interface';
+import { IUserService } from '../../../services/interfaces/services/userService.interface';
 import { LoginUser } from '../../../types/loginUser.type';
 import User from '../../../types/user.type';
 import { ServiceError } from '../utils/error';

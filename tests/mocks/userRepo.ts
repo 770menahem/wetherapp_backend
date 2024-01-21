@@ -1,4 +1,5 @@
-import { IUserDal } from '../../src/interfaces/DAL/userDal.interface';
+import { IUserDal } from './../../src/services/interfaces/dal/userDal.interface';
+
 import User from '../../src/types/user.type';
 
 class UserRepoMock implements IUserDal {

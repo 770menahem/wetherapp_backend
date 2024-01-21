@@ -7,7 +7,7 @@
 // const errorRes = (res: Response) => res.status(401).send({ error: 'unauthorized', status: 401 });
 
 // type payloadType = {
-//     userIdEnc: string;
+//     userId: string;
 // };
 
 // const isAuth = async (req: Request, res: Response, next: NextFunction) => {
@@ -20,9 +20,9 @@
 
 //         const payload: payloadType = verify(token, config.keys.tokenKey) as payloadType;
 
-//         if (!payload || !payload.userIdEnc) return errorRes(res);
+//         if (!payload || !payload.userId) return errorRes(res);
 
-//         const userId = decrypt(payload.userIdEnc);
+//         const userId = decrypt(payload.userId);
 
 //         const user = await UserS.getUserById(userId);
 
