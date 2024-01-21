@@ -14,14 +14,14 @@ export class PhotoService implements IPhotoService {
         this.PhotoRepo = PhotoRepo;
         this._logger = logger;
     }
-    async createPhoto(photo: createPhotoDTO): Promise<Photo> {
+    createPhoto = async (photo: createPhotoDTO): Promise<Photo> => {
         const newPhoto = await this.PhotoRepo.create(photo);
 
         this._logger.logInfo({ message: `Photo created: ${newPhoto._id}` });
 
         return newPhoto;
-    }
-    async getPhotosByUserId(userId: string, paginated: Pagination): Promise<Photo[]> {
+    };
+    getPhotosByUserId = async (userId: string, paginated: Pagination): Promise<Photo[]> => {
         const photos = await this.PhotoRepo.getUsersPhotos(userId, paginated);
 
         if (!photos) {
@@ -32,17 +32,17 @@ export class PhotoService implements IPhotoService {
         this._logger.logInfo({ message: `Photos retrieved for user: ${userId}`, extraFields: { photosCount: photos?.length } });
 
         return photos;
-    }
+    };
 
-    async getAllPhotosPaginated(paginated: Pagination): Promise<Photo[]> {
+    getAllPhotosPaginated = async (paginated: Pagination): Promise<Photo[]> => {
         const photos = await this.PhotoRepo.getAll(paginated);
 
         this._logger.logInfo({ message: `Photos retrieved`, extraFields: { photosCount: photos?.length } });
 
         return photos;
-    }
+    };
 
-    async getPhotoById(photoId: string): Promise<Photo> {
+    getPhotoById = async (photoId: string): Promise<Photo> => {
         const photo = await this.PhotoRepo.getById(photoId);
 
         if (!photo) {
@@ -53,8 +53,8 @@ export class PhotoService implements IPhotoService {
         this._logger.logInfo({ message: `Photo retrieved: ${photoId}` });
 
         return photo;
-    }
-    async updatePhotoById(photoId: string, description: string): Promise<Photo> {
+    };
+    updatePhotoById = async (photoId: string, description: string): Promise<Photo> => {
         const updatedPhoto = await this.PhotoRepo.updateDescription(photoId, description);
 
         if (!updatedPhoto) {
@@ -65,9 +65,9 @@ export class PhotoService implements IPhotoService {
         this._logger.logInfo({ message: `Photo updated: ${photoId}` });
 
         return updatedPhoto;
-    }
+    };
 
-    async deletePhotoById(photoId: string): Promise<Photo> {
+    deletePhotoById = async (photoId: string): Promise<Photo> => {
         const deletedPhoto = await this.PhotoRepo.delete(photoId);
 
         if (!deletedPhoto) {
@@ -78,5 +78,5 @@ export class PhotoService implements IPhotoService {
         this._logger.logInfo({ message: `Photo deleted: ${photoId}` });
 
         return deletedPhoto;
-    }
+    };
 }

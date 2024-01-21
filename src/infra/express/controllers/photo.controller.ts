@@ -10,46 +10,46 @@ export class PhotoController implements IPhotoController {
         this.PhotoService = PhotoService;
     }
 
-    async createPhoto(req: Request, res: Response): Promise<void> {
+    createPhoto = async (req: Request, res: Response): Promise<void> => {
         const userId = req.userId!;
         const { photo, description } = req.body;
 
         const newPhoto = await this.PhotoService.createPhoto({ photo, description, userId });
         res.status(201).json(newPhoto);
-    }
+    };
 
-    async getPhotosByUserId(req: Request, res: Response): Promise<void> {
+    getPhotosByUserId = async (req: Request, res: Response): Promise<void> => {
         const userId = req.userId!;
         const page: number = +req.query.page!;
         const limit: number = +req.query.limit!;
 
         const photos = await this.PhotoService.getPhotosByUserId(userId, { page, limit });
         res.status(200).json(photos);
-    }
-    async getAllPhotosPaginated(req: Request, res: Response): Promise<void> {
+    };
+    getAllPhotosPaginated = async (req: Request, res: Response): Promise<void> => {
         const page: number = +req.query.page!;
         const limit: number = +req.query.limit!;
 
         const photos = await this.PhotoService.getAllPhotosPaginated({ page, limit });
         res.status(200).json(photos);
-    }
-    async getPhotoById(req: Request, res: Response): Promise<void> {
+    };
+    getPhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
 
         const photo = await this.PhotoService.getPhotoById(photoId);
         res.status(200).json(photo);
-    }
-    async updatePhotoById(req: Request, res: Response): Promise<void> {
+    };
+    updatePhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
         const { description } = req.body;
 
         const updatedPhoto = await this.PhotoService.updatePhotoById(photoId, description);
         res.status(200).json(updatedPhoto);
-    }
-    async deletePhotoById(req: Request, res: Response): Promise<void> {
+    };
+    deletePhotoById = async (req: Request, res: Response): Promise<void> => {
         const { photoId } = req.params;
 
         const deletedPhoto = await this.PhotoService.deletePhotoById(photoId);
         res.status(200).json(deletedPhoto);
-    }
+    };
 }
