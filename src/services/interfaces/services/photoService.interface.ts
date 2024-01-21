@@ -8,5 +8,5 @@ export interface IPhotoService {
     getAllPhotosPaginated(paginated: Pagination): Promise<Photo[]>;
     getPhotoById(photoId: string): Promise<Photo>;
     updatePhotoById(photoId: string, description: string): Promise<Photo>;
-    deletePhotoById(photoId: string): Promise<Photo>;
+    deletePhotoById(photoId: string): Promise<void>;
 }

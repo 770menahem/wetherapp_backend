@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import { IPhotoService } from './interfaces/services/photoService.interface';
 import { ILogger } from '../log/logger';
 import { IPhotoDal } from './interfaces/dal/photoDal.interface';
@@ -21,6 +22,7 @@ export class PhotoService implements IPhotoService {
 
         return newPhoto;
     };
+
     getPhotosByUserId = async (userId: string, paginated: Pagination): Promise<Photo[]> => {
         const photos = await this.PhotoRepo.getUsersPhotos(userId, paginated);
 
@@ -31,7 +33,9 @@ export class PhotoService implements IPhotoService {
 
         this._logger.logInfo({ message: `Photos retrieved for user: ${userId}`, extraFields: { photosCount: photos?.length } });
 
-        return photos;
+        return photos.map((photo) => {
+            return { ...photo, path: `/api/photos/${photo._id}` };
+        });
     };
 
     getAllPhotosPaginated = async (paginated: Pagination): Promise<Photo[]> => {
@@ -39,7 +43,9 @@ export class PhotoService implements IPhotoService {
 
         this._logger.logInfo({ message: `Photos retrieved`, extraFields: { photosCount: photos?.length } });
 
-        return photos;
+        return photos.map((photo) => {
+            return { ...photo, path: `/api/photos/${photo._id}` };
+        });
     };
 
     getPhotoById = async (photoId: string): Promise<Photo> => {
@@ -64,10 +70,13 @@ export class PhotoService implements IPhotoService {
 
         this._logger.logInfo({ message: `Photo updated: ${photoId}` });
 
-        return updatedPhoto;
+        return {
+            ...updatedPhoto,
+            path: `/api/photos/${updatedPhoto._id}`,
+        };
     };
 
-    deletePhotoById = async (photoId: string): Promise<Photo> => {
+    deletePhotoById = async (photoId: string): Promise<void> => {
         const deletedPhoto = await this.PhotoRepo.delete(photoId);
 
         if (!deletedPhoto) {
@@ -75,8 +84,9 @@ export class PhotoService implements IPhotoService {
             throw new NotFoundError(`Photo not found: ${photoId}`);
         }
 
-        this._logger.logInfo({ message: `Photo deleted: ${photoId}` });
+        // delete photo from disk
+        fs.unlinkSync(deletedPhoto.path);
 
-        return deletedPhoto;
+        this._logger.logInfo({ message: `Photo deleted: ${photoId}` });
     };
 }
