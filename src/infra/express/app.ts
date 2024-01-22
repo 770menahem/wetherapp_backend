@@ -5,6 +5,7 @@ import * as logger from 'morgan';
 import IRouter from './routers/router.interface';
 import { errorMiddleware } from './utils/error';
 import checkConnections from './utils/checkConnections';
+import { initSwagger } from './utils/initSwagger';
 
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ class App {
         this.routers = routers;
         this.app = express();
         this.config();
+        initSwagger(this.app);
         this.initializeRouters();
     }
 
