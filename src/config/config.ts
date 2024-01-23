@@ -7,6 +7,10 @@ const config = {
         https_port: env.get('HTTPS_PORT').required().asPortNumber(),
         needAuth: env.get('NEED_AUTH').default('true').required().asBool(),
     },
+    weatherApi: {
+        baseUrl: env.get('WEATHER_API_BASE_URL').required().asString(),
+        weatherApiKey: env.get('WEATHER_API_KEY').required().asString(),
+    },
     mongo: {
         uri: env.get('MONGO_URI').required().asString(),
         uriTest: env.get('MONGO_TEST_URI').required().asString(),
@@ -14,6 +18,7 @@ const config = {
         userCollectionName: env.get('USER_COLLECTION_NAME').required().asString(),
         commentCollectionName: env.get('COMMENT_COLLECTION_NAME').required().asString(),
         tokenCollectionName: env.get('TOKEN_COLLECTION_NAME').required().asString(),
+        weatherCollectionName: env.get('WEATHER_COLLECTION_NAME').required().asString(),
     },
     keys: {
         initializationVector: env.get('VECTOR').example('length of 16 456').required().asString(),
