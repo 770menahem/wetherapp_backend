@@ -6,11 +6,13 @@ export abstract class BaseRouter<T> {
     protected _router = express.Router();
     protected controller: T;
     public auth: express.RequestHandler;
+    public swaggerPaths: any;
 
-    constructor(controller: T, auth: express.RequestHandler) {
+    constructor(controller: T, auth: express.RequestHandler, swaggerPaths: any) {
         this.controller = controller;
         this.auth = auth;
         this.initializeRoutes();
+        this.swaggerPaths = swaggerPaths;
     }
 
     get router() {

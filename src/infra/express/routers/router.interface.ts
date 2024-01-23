@@ -4,6 +4,7 @@ interface IRouter {
     path: string;
     router: Router;
     initializeRoutes(): void;
+    swaggerPaths: any;
 }
 
 export default IRouter;

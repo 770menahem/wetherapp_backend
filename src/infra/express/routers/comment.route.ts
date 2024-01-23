@@ -5,10 +5,11 @@ import validateRequest from '../joi/joi';
 import { wrapController } from '../utils/wraps';
 import { BaseRouter } from './baseRouter';
 import { createCommentSchema } from '../../../services/dtos/comment.schema';
+import { commentSwagger } from './swagger/comment';
 
 class CommentRouter extends BaseRouter<ICommentController> {
     constructor(commentController: ICommentController, auth: express.RequestHandler) {
-        super(commentController, auth);
+        super(commentController, auth, commentSwagger);
         this.path = '/comments';
         this.initializeRoutes();
     }
