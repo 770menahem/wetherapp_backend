@@ -11,6 +11,7 @@ export class UserRepo extends BaseRepository<User> implements IUserDal {
 
     private convertToUser = (user: User | null): User | null => {
         if (!user) return null;
+
         return {
             ...user,
             ...(user.imagePath && { imagePath: `/user/image/${user.imagePath}` }),
@@ -25,29 +26,29 @@ export class UserRepo extends BaseRepository<User> implements IUserDal {
 
     public create = async (user: User): Promise<User> => {
         const newUser = await this._model.create(user);
-        return this.convertToUser(newUser)!;
+        return this.convertToUser(newUser.toObject())!;
     };
 
     public updateName = async (userId: string, name: string): Promise<User | null> => {
-        const user = await this._model.findByIdAndUpdate(userId, { name }, { new: true });
+        const user = await this._model.findByIdAndUpdate(userId, { name }, { new: true }).lean();
 
         return this.convertToUser(user);
     };
 
     public delete = async (userId: string): Promise<User | null> => {
-        const user = await this._model.findByIdAndDelete({ _id: userId });
+        const user = await this._model.findByIdAndDelete({ _id: userId }).lean();
 
         return this.convertToUser(user);
     };
 
     public get = async (userId: string): Promise<User | null> => {
-        const user = await this._model.findById(userId, { password: 0 });
+        const user = await this._model.findById(userId, { password: 0 }).lean();
 
         return this.convertToUser(user);
     };
 
     public getByNameAndPassword = async (name: string, password: string): Promise<User | null> => {
-        const user = await this._model.findOne({ name, password }, { password: 0 });
+        const user = await this._model.findOne({ name, password }, { password: 0 }).lean();
 
         return this.convertToUser(user);
     };

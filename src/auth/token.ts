@@ -7,5 +7,13 @@ export const generateToken = (userId: string) => {
         userIdEnc: encrypt(userId),
     };
 
-    return sign(payload, config.keys.tokenKey, { expiresIn: '24h' });
+    return sign(payload, config.keys.tokenKey, { expiresIn: '50s' });
+};
+
+export const generateRefreshToken = (userId: string) => {
+    const payload = {
+        userIdEnc: encrypt(userId),
+    };
+
+    return sign(payload, config.keys.tokenKey);
 };

@@ -2,8 +2,13 @@ import { IPhotoDal } from '../../../services/interfaces/dal/photoDal.interface';
 import { Photo } from '../../../types/photo.type';
 import { BaseRepository } from './baseRepository';
 import { Pagination } from '../../../types/pagination';
+import mongoose from 'mongoose';
 
 export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
+    constructor(conn: mongoose.Connection, collectionName: string, schema: mongoose.Schema) {
+        super(conn, collectionName, schema);
+    }
+
     getPhotos = async (pagination: Pagination): Promise<Photo[]> => {
         const photos = await this._model
             .aggregate([
@@ -72,6 +77,7 @@ export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
 
         return Photo;
     };
+
     getUsersPhotos = async (userId: string, pagination: Pagination): Promise<Photo[]> => {
         const photos = await this._model
             .aggregate([

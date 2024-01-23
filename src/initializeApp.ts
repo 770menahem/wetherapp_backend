@@ -20,12 +20,16 @@ import { CommentService } from './services/comment.service';
 import { CommentController } from './infra/express/controllers/comment.controller';
 import CommentRouter from './infra/express/routers/comment.route';
 import { commentSchema } from './infra/mongo/models/comment.model';
+import { TokensRepo } from './infra/mongo/repo/token.repo';
+import { tokenSchema } from './infra/mongo/models/token.model';
 
 export function initializeApp(port: any) {
     const logger = new Logger();
 
+    const tokenRepo = new TokensRepo(conn, config.mongo.tokenCollectionName, tokenSchema);
+
     const userRepo = new UserRepo(conn, config.mongo.userCollectionName, userSchema);
-    const userService = new UserService(userRepo, logger);
+    const userService = new UserService(userRepo, logger, tokenRepo);
     const userController = new UserController(userService);
     const auth = new Auth(userService.auth);
     const userRouter = new UserRouter(userController, auth.check);

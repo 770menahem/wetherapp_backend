@@ -1,3 +1,4 @@
+import { LoginUser } from '../../../types/loginUser.type';
 import User from '../../../types/user.type';
 
 export interface IUserService {
@@ -7,6 +8,8 @@ export interface IUserService {
     getUserById(userId: string): Promise<User | null>;
     getAllUsers(): Promise<User[] | null>;
     getUserByNameAndPassword(name: string, password: string): Promise<User | null>;
-    login(name: string, password: string): Promise<{ user: User; token: string } | null>;
+    login(name: string, password: string): Promise<LoginUser | null>;
     auth(token: string): Promise<string | null>;
+    logout(token: string): Promise<void>;
+    refresh(token: string): Promise<string>;
 }

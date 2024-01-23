@@ -16,6 +16,13 @@ export class NotFoundError extends ServiceError {
     }
 }
 
+// no token provided error
+export class NoTokenError extends ServiceError {
+    constructor(message: string) {
+        super(401, message);
+    }
+}
+
 /**
  * Error middleware, handles the error by the status code.
  * @param { Error } error - The error
