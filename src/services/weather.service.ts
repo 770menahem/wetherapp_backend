@@ -32,7 +32,7 @@ export class WeatherService implements IWeatherService {
             }
         }
 
-        this._logger.logInfo({ message: `Weather found: ${weather}` });
+        this._logger.logInfo({ message: `Weather found: ${weather.name}` });
 
         return weather;
     };
