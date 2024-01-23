@@ -7,6 +7,7 @@ export const userSchema = new mongoose.Schema(
         password: { type: String, required: true },
         createdAt: { type: Date, required: false },
         updatedAt: { type: Date, required: false },
+        imagePath: [{ type: String, required: false }],
     },
     { versionKey: false },
 );
