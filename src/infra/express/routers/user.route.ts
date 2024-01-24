@@ -5,7 +5,7 @@ import { IUserController } from '../controllers/userController.interface';
 import validateRequest from '../joi/joi';
 import { wrapController } from '../utils/wraps';
 import { BaseRouter } from './baseRouter';
-import { userSwagger } from './swagger/user';
+import { userSwagger } from './swagger/path/user.path';
 import { userContent } from './swagger/content/user.content';
 
 class UserRouter extends BaseRouter<IUserController> {

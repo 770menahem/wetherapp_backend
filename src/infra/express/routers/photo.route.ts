@@ -7,7 +7,7 @@ import { updatePhotoSchema } from '../../../services/dtos/photo.schema';
 import { IPhotoController } from '../controllers/photoController.interface';
 import { paginatedSchema } from '../../../services/dtos/global.schema';
 import { uploadPhoto } from '../utils/multer.middleware';
-import { photoSwagger } from './swagger/photo';
+import { photoSwagger } from './swagger/path/photo.path';
 import { photoContent } from './swagger/content/photo.content';
 
 class PhotoRouter extends BaseRouter<IPhotoController> {

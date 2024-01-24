@@ -3,7 +3,7 @@ import { IWeatherController } from '../controllers/weatherController.interface';
 import { wrapController } from '../utils/wraps';
 import { BaseRouter } from './baseRouter';
 import * as apicache from 'apicache';
-import { weatherSwagger } from './swagger/weather';
+import { weatherSwagger } from './swagger/path/weather.path';
 import { weatherContent } from './swagger/content/weather.content';
 
 class WeatherRouter extends BaseRouter<IWeatherController> {

@@ -5,7 +5,7 @@ import validateRequest from '../joi/joi';
 import { wrapController } from '../utils/wraps';
 import { BaseRouter } from './baseRouter';
 import { createCommentSchema } from '../../../services/dtos/comment.schema';
-import { commentSwagger } from './swagger/comment';
+import { commentSwagger } from './swagger/path/comment.path';
 import { commentContent } from './swagger/content/comment.content';
 
 class CommentRouter extends BaseRouter<ICommentController> {
