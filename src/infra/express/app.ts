@@ -23,10 +23,10 @@ class App {
         this.routers = routers;
         this.app = express();
         this.config();
-        initSwagger(
-            this.app,
-            this.routers.map((router) => router.swaggerPaths),
-        );
+        initSwagger(this.app, {
+            paths: this.routers.map((router) => router.swaggerPaths),
+            schemas: this.routers.map((router) => router.swaggerContent),
+        });
         this.initializeRouters();
     }
 

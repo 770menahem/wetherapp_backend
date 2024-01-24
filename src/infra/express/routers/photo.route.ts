@@ -8,10 +8,11 @@ import { IPhotoController } from '../controllers/photoController.interface';
 import { paginatedSchema } from '../../../services/dtos/global.schema';
 import { uploadPhoto } from '../utils/multer.middleware';
 import { photoSwagger } from './swagger/photo';
+import { photoContent } from './swagger/content/photo.content';
 
 class PhotoRouter extends BaseRouter<IPhotoController> {
     constructor(photoController: IPhotoController, auth: express.RequestHandler) {
-        super(photoController, auth, photoSwagger);
+        super(photoController, auth, photoSwagger, photoContent);
         this.path = '/photos';
         this.initializeRoutes();
     }

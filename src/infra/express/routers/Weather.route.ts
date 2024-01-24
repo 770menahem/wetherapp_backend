@@ -4,10 +4,11 @@ import { wrapController } from '../utils/wraps';
 import { BaseRouter } from './baseRouter';
 import * as apicache from 'apicache';
 import { weatherSwagger } from './swagger/weather';
+import { weatherContent } from './swagger/content/weather.content';
 
 class WeatherRouter extends BaseRouter<IWeatherController> {
     constructor(weatherController: IWeatherController, auth: express.RequestHandler) {
-        super(weatherController, auth, weatherSwagger);
+        super(weatherController, auth, weatherSwagger, weatherContent);
         this.path = '/weather';
         this.initializeRoutes();
     }

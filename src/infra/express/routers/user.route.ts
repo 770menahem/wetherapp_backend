@@ -6,10 +6,11 @@ import validateRequest from '../joi/joi';
 import { wrapController } from '../utils/wraps';
 import { BaseRouter } from './baseRouter';
 import { userSwagger } from './swagger/user';
+import { userContent } from './swagger/content/user.content';
 
 class UserRouter extends BaseRouter<IUserController> {
     constructor(userController: IUserController, auth: express.RequestHandler) {
-        super(userController, auth, userSwagger);
+        super(userController, auth, userSwagger, userContent);
         this.path = '/users';
         this.initializeRoutes();
     }

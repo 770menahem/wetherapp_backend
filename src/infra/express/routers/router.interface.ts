@@ -5,6 +5,7 @@ interface IRouter {
     router: Router;
     initializeRoutes(): void;
     swaggerPaths: any;
+    swaggerContent?: any;
 }
 
 export default IRouter;
