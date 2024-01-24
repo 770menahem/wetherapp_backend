@@ -83,6 +83,13 @@ class UserControllerMock implements IUserController {
             res.status(404).send({ message: 'User not found' });
         }
     };
+
+    logout(_req: Request, _res: Response): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+    refresh(_req: Request, _res: Response): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
 }
 
 export default UserControllerMock;

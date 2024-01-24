@@ -2,11 +2,6 @@ export const userSwagger = {
     '/users': {
         post: {
             tags: ['Users'],
-            security: [
-                {
-                    JWT: [],
-                },
-            ],
             summary: 'Create user',
             description: 'Create user',
             requestBody: {
@@ -175,14 +170,8 @@ export const userSwagger = {
     '/users/login': {
         post: {
             tags: ['Users'],
-            security: [
-                {
-                    JWT: [],
-                },
-            ],
             summary: 'Login',
             description: 'Login',
-
             requestBody: {
                 content: {
                     'application/json': {
@@ -219,11 +208,6 @@ export const userSwagger = {
     '/users/refresh': {
         get: {
             tags: ['Users'],
-            security: [
-                {
-                    JWT: [],
-                },
-            ],
             summary: 'Refresh token',
             description: 'Refresh token',
             responses: {

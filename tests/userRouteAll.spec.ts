@@ -9,6 +9,7 @@ import config from '../src/config/config';
 import UserRepoMock from './mocks/userRepo';
 import { encrypt } from '../src/utils/encrypt';
 import Logger from '../src/infra/winston/logger';
+import { TokenRepoMock } from './mocks/tokenRepo';
 
 let server: App;
 let token: string;
@@ -26,7 +27,11 @@ describe('User routes', () => {
         repo.create({ _id: '1', name: 'test user', password: encrypt('test') });
         repo.create({ _id: idToDelete, name: 'test user', password: encrypt('test') });
 
-        const userController = new UserController(new UserService(repo, new Logger()));
+        const tokenRepo = new TokenRepoMock();
+        const logger = new Logger();
+        const userService = new UserService(repo, logger, tokenRepo);
+        const userController = new UserController(userService);
+
         const userRouter = new UserRouter(userController, auth.check);
 
         server = new App(5770, [userRouter]);
