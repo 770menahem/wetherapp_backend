@@ -1,19 +1,16 @@
-import JoiDate from '@joi/date';
-import * as BaseJoi from 'joi';
-
-const Joi = BaseJoi.extend(JoiDate);
-Joi.objectId = require('joi-objectid')(Joi);
+import * as Joi from 'joi';
 
 export type createUserDTO = {
     name: string;
     password: string;
 };
 
-
 export const createSchema = Joi.object({
     body: {
         name: Joi.string().required(),
         password: Joi.string().required(),
+        photo: Joi.string().required(),
+        photoName: Joi.string().required(),
     },
 });
 
@@ -21,4 +18,10 @@ export const updateSchema = Joi.object({
     body: {
         name: Joi.string().required(),
     },
+});
+
+export const logoutSchema = Joi.object({
+    headers: Joi.object({
+        refreshtoken: Joi.string().required(),
+    }).unknown(),
 });

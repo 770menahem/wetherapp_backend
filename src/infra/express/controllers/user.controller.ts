@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { IUserService } from '../../../services/interfaces/services/userService.interface';
 import { LoginUser } from '../../../types/loginUser.type';
 import User from '../../../types/user.type';
-import { ServiceError } from '../utils/error';
+import { NotFoundError, ServiceError } from '../utils/error';
 import { IUserController } from './userController.interface';
 
 export class UserController implements IUserController {
@@ -23,11 +23,15 @@ export class UserController implements IUserController {
     };
 
     createUser = async (req: Request, res: Response) => {
-        const user: User | null = await this.UserService.createUser(req.body);
+        const user: User | null = await this.UserService.createUser({
+            name: req.body.name,
+            password: req.body.password,
+            imagePath: req.file?.path,
+        });
 
         if (!user) throw new ServiceError(404, 'fail to create user');
 
-        res.send(user);
+        res.status(201).send(user);
     };
 
     updateUser = async (req: Request, res: Response) => {
@@ -77,9 +81,9 @@ export class UserController implements IUserController {
     refresh = async (req: Request, res: Response) => {
         const refreshToken = req.headers['refreshtoken'] as string;
 
-        const user: string | null = await this.UserService.refresh(refreshToken);
+        const newToken: string | null = await this.UserService.refresh(refreshToken);
 
-        if (!user) throw new ServiceError(404, 'fail to refresh');
-        else res.send(user);
+        if (!newToken) throw new NotFoundError('fail to refresh');
+        else res.send({ token: newToken });
     };
 }

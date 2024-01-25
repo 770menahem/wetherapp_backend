@@ -6,6 +6,7 @@ const config = {
         port: env.get('PORT').required().asPortNumber(),
         https_port: env.get('HTTPS_PORT').required().asPortNumber(),
         needAuth: env.get('NEED_AUTH').default('true').required().asBool(),
+        tokenExpiration: env.get('TOKEN_EXPIRATION').default('1h').required().asString(),
     },
     weatherApi: {
         baseUrl: env.get('WEATHER_API_BASE_URL').required().asString(),

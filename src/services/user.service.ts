@@ -38,6 +38,7 @@ export class UserService implements IUserService {
         const newUser = await this.UserRepo.create({
             name: user.name,
             password: encrypt(user.password!),
+            imagePath: user.imagePath,
         });
 
         this._logger.logInfo({ message: 'User created successfully' });

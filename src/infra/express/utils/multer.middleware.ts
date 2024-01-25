@@ -20,16 +20,16 @@ export const uploadPhoto = async (req: Request, res: Response, next: NextFunctio
     upload(req, res, function (err) {
         try {
             if (err instanceof multer.MulterError) {
-                return res.status(500).send({ message: err.message });
+                return res.status(400).send({ message: err.message });
             } else if (err) {
-                return res.status(500).send({ message: err.message });
+                return res.status(400).send({ message: err.message });
             }
 
             req.body.photo = req.file!.path;
             req.body.photoName = req.file!.originalname;
             return next();
-        } catch (error) {
-            next(error);
+        } catch (error: any) {
+            return res.status(400).send({ message: error?.message ?? error });
         }
     });
 };

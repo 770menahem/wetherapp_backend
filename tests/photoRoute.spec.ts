@@ -46,7 +46,7 @@ describe('Photo routes', () => {
             await request(server.getApp()).delete(`/api/photos/${imageId}`);
         }
 
-        await conn.dropCollection('testPhoto');
+        // await conn.dropCollection('testPhoto');
 
         await server.stop();
         conn.close();

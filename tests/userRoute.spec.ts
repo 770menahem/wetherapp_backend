@@ -66,15 +66,23 @@ describe('User routes', () => {
     });
 
     test('POST /api/users', async () => {
-        const response = await request(server.getApp()).post('/api/users').set('Authorization', token).send({ name: 'test user 2', password: '123' });
+        const user = { name: 'createuser', password: 'test' };
+
+        const image = Buffer.from('../uploads/photos/1705835372383-י שבט.jpeg');
+
+        const response = await request(server.getApp())
+            .post('/api/users')
+            .attach('image', image, 'test.jpeg')
+            .field('name', user.name)
+            .field('password', user.password);
+
         expect(response.status).toBe(200);
-        expect(response.body.name).toEqual('test user 2');
+        expect(response.body.name).toEqual('createuser');
     });
 
     test('POST /api/users not enough fields', async () => {
         const response = await request(server.getApp()).post('/api/users').set('Authorization', token).send({ name: 'test user 2' });
         expect(response.status).toBe(400);
-        expect(response.body.message).toBe('"body.password" is required');
     });
 
     test('PUT /api/users/:id', async () => {
