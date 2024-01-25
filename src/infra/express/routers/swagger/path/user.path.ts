@@ -191,13 +191,6 @@ export const userSwagger = {
             responses: {
                 200: {
                     description: 'User logged in',
-                    content: {
-                        'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/Login',
-                            },
-                        },
-                    },
                 },
                 400: {
                     description: 'Bad request',

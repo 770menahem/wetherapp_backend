@@ -18,6 +18,12 @@ export const initSwagger = (app: express.Application, swaggerConfig: SwaggerConf
                     name: 'Authorization',
                     description: 'JWT token',
                 },
+                JWT2: {
+                    type: 'apiKey',
+                    in: 'header',
+                    name: 'refreshtoken',
+                    description: 'JWT token',
+                },
             },
             schemas: {
                 ...swaggerConfig.schemas.reduce((acc, content) => ({ ...acc, ...(content ?? {}) }), {}),

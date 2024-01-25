@@ -22,13 +22,6 @@ export const photoSwagger = {
                 },
                 {
                     in: 'formData',
-                    name: 'title',
-                    description: 'Photo title',
-                    required: true,
-                    type: 'string',
-                },
-                {
-                    in: 'formData',
                     name: 'description',
                     description: 'Photo description',
                     required: false,
@@ -39,7 +32,7 @@ export const photoSwagger = {
                 200: {
                     description: 'Successful operation',
                     schema: {
-                        $ref: '#/definitions/Photo',
+                        $ref: '#/components/schemas/Photo',
                     },
                 },
                 400: {
@@ -84,7 +77,7 @@ export const photoSwagger = {
                 200: {
                     description: 'Successful operation',
                     schema: {
-                        $ref: '#/definitions/Photo',
+                        $ref: '#/components/schemas/Photo',
                     },
                 },
                 400: {
@@ -131,7 +124,7 @@ export const photoSwagger = {
                 200: {
                     description: 'Successful operation',
                     schema: {
-                        $ref: '#/definitions/Photo',
+                        $ref: '#/components/schemas/Photo',
                     },
                 },
                 400: {

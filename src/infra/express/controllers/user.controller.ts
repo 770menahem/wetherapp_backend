@@ -26,12 +26,18 @@ export class UserController implements IUserController {
         const user: User | null = await this.UserService.createUser({
             name: req.body.name,
             password: req.body.password,
-            imagePath: req.file?.path,
+            imagePath: 'users/image/' + req.file?.path.split('/').pop(),
         });
 
         if (!user) throw new ServiceError(404, 'fail to create user');
 
         res.status(201).send(user);
+    };
+
+    image = async (req: Request, res: Response) => {
+        const path = req.params.path;
+
+        res.download(`./uploads/photos/${path}`);
     };
 
     updateUser = async (req: Request, res: Response) => {
