@@ -28,4 +28,21 @@ export const userContent = {
             },
         },
     },
+    CreateUser: {
+        type: 'object',
+        properties: {
+            name: {
+                type: 'string',
+                example: 'John Doe',
+            },
+            password: {
+                type: 'string',
+                example: '123456',
+            },
+            image: {
+                type: 'string',
+                example: 'https://www.google.com/image.png',
+            },
+        },
+    },
 };

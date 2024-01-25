@@ -4,11 +4,25 @@ export const userSwagger = {
             tags: ['Users'],
             summary: 'Create user',
             description: 'Create user',
+            consumes: 'multipart/form-data',
+            contentType: 'multipart/form-data',
             requestBody: {
                 content: {
-                    'application/json': {
+                    'multipart/form-data': {
                         schema: {
-                            $ref: '#/components/schemas/User',
+                            type: 'object',
+                            properties: {
+                                name: {
+                                    type: 'string',
+                                },
+                                password: {
+                                    type: 'string',
+                                },
+                                image: {
+                                    type: 'file',
+                                    format: 'binary',
+                                },
+                            },
                         },
                     },
                 },
@@ -203,16 +217,14 @@ export const userSwagger = {
             tags: ['Users'],
             summary: 'Refresh token',
             description: 'Refresh token',
+            security: [
+                {
+                    JWT2: [],
+                },
+            ],
             responses: {
                 200: {
                     description: 'Token refreshed',
-                    content: {
-                        'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/Login',
-                            },
-                        },
-                    },
                 },
                 400: {
                     description: 'Bad request',
@@ -233,6 +245,37 @@ export const userSwagger = {
             responses: {
                 200: {
                     description: 'User logged out',
+                },
+                400: {
+                    description: 'Bad request',
+                },
+            },
+        },
+    },
+    '/users/image/{path}': {
+        get: {
+            tags: ['Users'],
+            summary: 'Get image',
+            description: 'Get image',
+            security: [
+                {
+                    JWT: [],
+                },
+            ],
+            parameters: [
+                {
+                    in: 'path',
+                    name: 'path',
+                    schema: {
+                        type: 'string',
+                    },
+                    required: true,
+                    description: 'Image path',
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Image',
                 },
                 400: {
                     description: 'Bad request',
