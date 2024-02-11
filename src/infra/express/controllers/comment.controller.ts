@@ -18,7 +18,8 @@ export class CommentController implements ICommentController {
     };
 
     createComment = async (req: Request, res: Response): Promise<void> => {
-        const { comment, photoId } = req.body;
+        const { photoId } = req.params;
+        const { comment } = req.body;
 
         const newComment = await this.commentService.createComment({ comment, photoId, userId: req.userId! });
 

@@ -1,5 +1,5 @@
 export const commentSwagger = {
-    '/comments': {
+    '/comments/{photoId}': {
         get: {
             tags: ['Comments'],
             security: [
@@ -45,6 +45,13 @@ export const commentSwagger = {
             description: 'Create a comment',
             operationId: 'createComment',
             parameters: [
+                {
+                    name: 'photoId',
+                    in: 'path',
+                    description: 'Photo ID',
+                    required: true,
+                    type: 'string',
+                },
                 {
                     name: 'body',
                     in: 'body',

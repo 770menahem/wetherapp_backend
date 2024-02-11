@@ -18,7 +18,7 @@ class CommentRouter extends BaseRouter<ICommentController> {
     public initializeRoutes() {
         this.router.use(this.auth);
         this.router.get('/:photoId', wrapController(this.controller.getAllPhotoComments));
-        this.router.post('/', validateRequest(createCommentSchema), wrapController(this.controller.createComment));
+        this.router.post('/:photoId', validateRequest(createCommentSchema), wrapController(this.controller.createComment));
     }
 }
 
