@@ -21,9 +21,9 @@ class UserRouter extends BaseRouter<IUserController> {
         this.router.get('/refresh', wrapController(this.controller.refresh));
         this.router.post('', wrapController(uploadPhoto), validateRequest(createSchema), wrapController(this.controller.createUser));
         this.router.post('/logout', validateRequest(logoutSchema), wrapController(this.controller.logout));
+        this.router.get('/image/:path', wrapController(this.controller.image));
         this.router.use(this.auth);
         this.router.get('', wrapController(this.controller.getAllUsers));
-        this.router.get('/image/:path', wrapController(this.controller.image));
         this.router.get('/:userId', wrapController(this.controller.getUserById));
         this.router.put('/:userId', validateRequest(updateSchema), wrapController(this.controller.updateUser));
         this.router.delete('/:userId', wrapController(this.controller.deleteUser));
