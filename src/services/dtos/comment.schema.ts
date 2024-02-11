@@ -8,8 +8,10 @@ export type createCommentDTO = {
 };
 
 export const createCommentSchema = Joi.object({
+    params: {
+        photoId: Joi.string().required(),
+    },
     body: {
         comment: Joi.string().required(),
-        photoId: Joi.string().required(),
     },
 });

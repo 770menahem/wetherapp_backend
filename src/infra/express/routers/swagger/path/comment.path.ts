@@ -52,13 +52,20 @@ export const commentSwagger = {
                     required: true,
                     type: 'string',
                 },
-                {
-                    name: 'body',
-                    in: 'body',
-                    description: 'Comment object',
-                    required: true,
-                },
             ],
+            requestBody: {
+                content: {
+                    'application/json': {
+                        schema: {
+                            properties: {
+                                comment: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
             responses: {
                 '200': {
                     description: 'Comment created',
