@@ -24,9 +24,6 @@ export const commentSwagger = {
                     description: 'Comments',
                     schema: {
                         type: 'array',
-                        items: {
-                            $ref: '#/definitions/Comment',
-                        },
                     },
                 },
                 '401': {
@@ -53,17 +50,11 @@ export const commentSwagger = {
                     in: 'body',
                     description: 'Comment object',
                     required: true,
-                    schema: {
-                        $ref: '#/definitions/Comment',
-                    },
                 },
             ],
             responses: {
                 '200': {
                     description: 'Comment created',
-                    schema: {
-                        $ref: '#/definitions/Comment',
-                    },
                 },
                 '400': {
                     description: 'Bad request',

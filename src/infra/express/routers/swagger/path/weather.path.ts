@@ -23,13 +23,6 @@ export const weatherSwagger = {
             responses: {
                 200: {
                     description: 'Weather',
-                    content: {
-                        'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/CityWeatherDetails',
-                            },
-                        },
-                    },
                 },
                 404: {
                     description: 'Not found',
