@@ -14,8 +14,6 @@ export class WeatherService implements IWeatherService {
     }
 
     getWeather = async (city: string): Promise<CityWeatherDetails> => {
-        this._logger.logInfo({ message: `Weather not found: ${city} in db` });
-
         const weather = await this.weatherApi.getWeather(city);
 
         if (!weather) {
