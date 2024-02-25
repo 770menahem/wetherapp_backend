@@ -23,8 +23,6 @@ import CommentRouter from './infra/express/routers/comment.route';
 import { commentSchema } from './infra/mongo/models/comment.model';
 import { TokensRepo } from './infra/mongo/repo/token.repo';
 import { tokenSchema } from './infra/mongo/models/token.model';
-import { WeatherRepo } from './infra/mongo/repo/weather.repo';
-import { weatherSchema } from './infra/mongo/models/weather.model';
 import { WeatherService } from './services/weather.service';
 import { WeatherController } from './infra/express/controllers/weather.controller';
 import WeatherRouter from './infra/express/routers/Weather.route';
@@ -50,9 +48,8 @@ export function initializeApp(port: any) {
     const commentController = new CommentController(commentService);
     const commentRouter = new CommentRouter(commentController, auth.check);
 
-    const weatherRepo = new WeatherRepo(conn, config.mongo.weatherCollectionName, weatherSchema);
     const weatherApi = new WeatherApi(config.weatherApi.baseUrl, config.weatherApi.weatherApiKey);
-    const weatherService = new WeatherService(weatherRepo, weatherApi, logger);
+    const weatherService = new WeatherService(weatherApi, logger);
     const weatherController = new WeatherController(weatherService);
     const weatherRouter = new WeatherRouter(weatherController, auth.check);
 

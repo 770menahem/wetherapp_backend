@@ -19,7 +19,6 @@ const config = {
         userCollectionName: env.get('USER_COLLECTION_NAME').required().asString(),
         commentCollectionName: env.get('COMMENT_COLLECTION_NAME').required().asString(),
         tokenCollectionName: env.get('TOKEN_COLLECTION_NAME').required().asString(),
-        weatherCollectionName: env.get('WEATHER_COLLECTION_NAME').required().asString(),
     },
     keys: {
         initializationVector: env.get('VECTOR').example('length of 16 456').required().asString(),

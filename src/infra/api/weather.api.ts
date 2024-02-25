@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import { IWeatherGetDal } from '../../services/interfaces/dal/waetherDal.interface';
+import { IWeatherDal } from '../../services/interfaces/dal/waetherDal.interface';
 
-export class WeatherApi implements IWeatherGetDal {
+export class WeatherApi implements IWeatherDal {
     protected _axiosInstance: AxiosInstance;
     private apikKey: string;
 
