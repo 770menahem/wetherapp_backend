@@ -10,24 +10,26 @@ export const photoSwagger = {
             summary: 'Create photo',
             description: 'Create photo',
             operationId: 'createPhoto',
-            consumes: ['multipart/form-data'],
-            produces: ['application/json'],
-            parameters: [
-                {
-                    in: 'formData',
-                    name: 'photo',
-                    description: 'Photo to upload',
-                    required: true,
-                    type: 'file',
+            consumes: 'multipart/form-data',
+            contentType: 'multipart/form-data',
+            requestBody: {
+                content: {
+                    'multipart/form-data': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                image: {
+                                    type: 'file',
+                                    format: 'binary',
+                                },
+                                description: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
                 },
-                {
-                    in: 'formData',
-                    name: 'description',
-                    description: 'Photo description',
-                    required: false,
-                    type: 'string',
-                },
-            ],
+            },
             responses: {
                 200: {
                     description: 'Successful operation',
