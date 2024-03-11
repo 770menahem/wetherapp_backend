@@ -23,10 +23,11 @@ export class UserController implements IUserController {
     };
 
     createUser = async (req: Request, res: Response) => {
+        const pathWithNoBackslash = req.body.photo.replace(/\\/g, '/');
         const user: User | null = await this.UserService.createUser({
             name: req.body.name,
             password: req.body.password,
-            imagePath: 'users/image/' + req.body.photo.split('/').split('\\').pop(),
+            imagePath: 'users/image/' + pathWithNoBackslash,
         });
 
         if (!user) throw new ServiceError(404, 'fail to create user');
