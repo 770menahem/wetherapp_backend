@@ -23,7 +23,7 @@ export class UserController implements IUserController {
     };
 
     createUser = async (req: Request, res: Response) => {
-        const pathWithNoBackslash = req.body.photo.replace(/\\/g, '/');
+        const pathWithNoBackslash = req.body.photo.replace(/\\\//g, '/');
         const user: User | null = await this.UserService.createUser({
             name: req.body.name,
             password: req.body.password,
