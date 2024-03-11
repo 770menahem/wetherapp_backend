@@ -18,12 +18,13 @@ class PhotoRouter extends BaseRouter<IPhotoController> {
     }
 
     public initializeRoutes() {
+        this.router.get('/:photoId', wrapController(this.controller.getPhotoById));
+
         this.router.use(this.auth);
 
         this.router.post('', wrapController(uploadPhoto), wrapController(this.controller.createPhoto));
         this.router.get('/my', validateRequest(paginatedSchema), wrapController(this.controller.getPhotosByUserId));
         this.router.get('/', validateRequest(paginatedSchema), wrapController(this.controller.getAllPhotosPaginated));
-        this.router.get('/:photoId', wrapController(this.controller.getPhotoById));
         this.router.put('/:photoId', validateRequest(updatePhotoSchema), wrapController(this.controller.updatePhotoById));
         this.router.delete('/:photoId', wrapController(this.controller.deletePhotoById));
     }
