@@ -26,7 +26,7 @@ export class UserController implements IUserController {
         const user: User | null = await this.UserService.createUser({
             name: req.body.name,
             password: req.body.password,
-            imagePath: 'users/image/' + req.body.photo.split('/').pop(),
+            imagePath: 'users/image/' + req.body.photo.split('/').split('\\').pop(),
         });
 
         if (!user) throw new ServiceError(404, 'fail to create user');
