@@ -141,4 +141,97 @@ export const photoSwagger = {
             },
         },
     },
+    '/photos/{photoId}': {
+        get: {
+            tags: ['Photos'],
+            security: [
+                {
+                    JWT: [],
+                },
+            ],
+            summary: 'Get photo by id',
+            description: 'Get photo by id',
+            operationId: 'getPhotoById',
+            produces: ['application/json'],
+            parameters: [
+                {
+                    in: 'path',
+                    name: 'photoId',
+                    description: 'Photo id',
+                    required: true,
+                    type: 'string',
+                },
+            ],
+            responses: {
+                200: {
+                    description: 'Successful operation',
+                    schema: {
+                        $ref: '#/components/schemas/Photo',
+                    },
+                },
+                400: {
+                    description: 'Invalid request',
+                },
+                401: {
+                    description: 'Unauthorized',
+                },
+                500: {
+                    description: 'Internal server error',
+                },
+            },
+        },
+        put: {
+            tags: ['Photos'],
+            security: [
+                {
+                    JWT: [],
+                },
+            ],
+            summary: 'Update photo by id',
+            description: 'Update photo by id',
+            operationId: 'updatePhotoById',
+            consumes: 'application/json',
+            contentType: 'application/json',
+            parameters: [
+                {
+                    in: 'path',
+                    name: 'photoId',
+                    description: 'Photo id',
+                    required: true,
+                    type: 'string',
+                },
+            ],
+            requestBody: {
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                description: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            responses: {
+                200: {
+                    description: 'Successful operation',
+                    schema: {
+                        $ref: '#/components/schemas/Photo',
+                    },
+                },
+                400: {
+                    description: 'Invalid request',
+                },
+                401: {
+                    description: 'Unauthorized',
+                },
+                500: {
+                    description: 'Internal server error',
+                },
+            },
+        },
+    },
 };
