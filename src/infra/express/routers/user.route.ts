@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { createSchema, updateSchema, logoutSchema } from '../../../services/dtos/user.schema';
+import { createGoogleSchema, createSchema, updateSchema, logoutSchema } from '../../../services/dtos/user.schema';
 import { IUserController } from '../controllers/userController.interface';
 
 import validateRequest from '../joi/joi';
@@ -20,6 +20,7 @@ class UserRouter extends BaseRouter<IUserController> {
         this.router.post('/login', wrapController(this.controller.login));
         this.router.get('/refresh', wrapController(this.controller.refresh));
         this.router.post('', wrapController(uploadPhoto), validateRequest(createSchema), wrapController(this.controller.createUser));
+        this.router.post('/google', validateRequest(createGoogleSchema), wrapController(this.controller.createGoogleUser));
         this.router.post('/logout', validateRequest(logoutSchema), wrapController(this.controller.logout));
         this.router.get('/image/:path', wrapController(this.controller.image));
         this.router.use(this.auth);
