@@ -69,6 +69,47 @@ export const userSwagger = {
             },
         },
     },
+    '/users/google': {
+        post: {
+            tags: ['Users'],
+            summary: 'Create user with google',
+            description: 'Create user with google',
+            requestBody: {
+                content: {
+                    'application/json': {
+                        schema: {
+                            properties: {
+                                name: {
+                                    type: 'string',
+                                },
+                                password: {
+                                    type: 'string',
+                                },
+                                imageUrl: {
+                                    type: 'string',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            responses: {
+                200: {
+                    description: 'User created',
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/User',
+                            },
+                        },
+                    },
+                },
+                400: {
+                    description: 'Bad request',
+                },
+            },
+        },
+    },
     '/users/{userId}': {
         get: {
             tags: ['Users'],

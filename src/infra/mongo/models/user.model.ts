@@ -8,6 +8,7 @@ export const userSchema = new mongoose.Schema(
         createdAt: { type: Date, required: false },
         updatedAt: { type: Date, required: false },
         imagePath: { type: String, required: false },
+        imageUrl: { type: String, required: false },
     },
     { versionKey: false },
 );
