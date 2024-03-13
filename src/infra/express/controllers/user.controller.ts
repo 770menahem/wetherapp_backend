@@ -36,6 +36,7 @@ export class UserController implements IUserController {
     };
 
     createGoogleUser = async (req: Request, res: Response) => {
+
         if (!(await this.UserService.getUserByNameAndPassword(req.body.name, req.body.password))) {
             const user: User | null = await this.UserService.createGoogleUser({
                 name: req.body.name,
@@ -50,6 +51,7 @@ export class UserController implements IUserController {
 
         if (!userLoged) throw new ServiceError(404, 'fail to login');
         else res.send(userLoged);
+
     };
 
     image = async (req: Request, res: Response) => {

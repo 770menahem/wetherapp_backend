@@ -13,6 +13,13 @@ export const createSchema = Joi.object({
         photoName: Joi.string().required(),
     },
 });
+export const createGoogleSchema = Joi.object({
+    body: {
+        name: Joi.string().required(),
+        password: Joi.string().required(),
+        imageUrl: Joi.string().required(),
+    },
+});
 
 export const createGoogleSchema = Joi.object({
     body: {
