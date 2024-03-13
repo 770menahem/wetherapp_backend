@@ -3,6 +3,7 @@ import User from '../../../types/user.type';
 
 export interface IUserService {
     createUser(user: User): Promise<User>;
+    createGoogleUser(user: User): Promise<User>;
     updateUser(userId: string, name: string): Promise<User | null>;
     deleteUser(userId: string): Promise<User | null>;
     getUserById(userId: string): Promise<User | null>;

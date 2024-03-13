@@ -14,4 +14,8 @@ export class CommentsRepo extends BaseRepository<Comment> implements ICommentDal
             photoId: new Types.ObjectId(comment.photoId),
         });
     };
+
+    deleteCoomentsByUserID = async (userId: string) => {
+        return await this._model.find({ userId }).remove();
+    };
 }

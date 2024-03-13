@@ -35,4 +35,12 @@ export class CommentService implements ICommentService {
 
         return newComment;
     };
+
+    deleteCoomentsByUserID = async (userId: string): Promise<any> => {
+        const comments = await this.commentRepo.deleteCoomentsByUserID(userId);
+
+        this.logger.logInfo({ message: `Comments deleted for user: ${userId}`, extraFields: { commentsCount: comments?.length } });
+
+        return comments;
+    };
 }

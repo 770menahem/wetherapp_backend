@@ -32,18 +32,19 @@ export function initializeApp(port: any) {
 
     const tokenRepo = new TokensRepo(conn, config.mongo.tokenCollectionName, tokenSchema);
 
+    const photoRepo = new PhotoRepo(conn, config.mongo.photoCollectionName, photoSchema); // Move the declaration and initialization of photoRepo here
+    const commentRepo = new CommentsRepo(conn, config.mongo.commentCollectionName, commentSchema);
+
     const userRepo = new UserRepo(conn, config.mongo.userCollectionName, userSchema);
-    const userService = new UserService(userRepo, logger, tokenRepo);
+    const userService = new UserService(userRepo, logger, tokenRepo, photoRepo, commentRepo);
     const userController = new UserController(userService);
     const auth = new Auth(userService.auth);
     const userRouter = new UserRouter(userController, auth.check);
 
-    const photoRepo = new PhotoRepo(conn, config.mongo.photoCollectionName, photoSchema);
     const photoService = new PhotoService(photoRepo, logger);
     const photoController = new PhotoController(photoService);
     const photoRouter = new PhotoRouter(photoController, auth.check);
 
-    const commentRepo = new CommentsRepo(conn, config.mongo.commentCollectionName, commentSchema);
     const commentService = new CommentService(commentRepo, logger);
     const commentController = new CommentController(commentService);
     const commentRouter = new CommentRouter(commentController, auth.check);

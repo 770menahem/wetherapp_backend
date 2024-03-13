@@ -14,6 +14,14 @@ export const createSchema = Joi.object({
     },
 });
 
+export const createGoogleSchema = Joi.object({
+    body: {
+        name: Joi.string().required(),
+        password: Joi.string().required(),
+        fullPath: Joi.string().required(),
+    },
+});
+
 export const updateSchema = Joi.object({
     body: {
         name: Joi.string().required(),
