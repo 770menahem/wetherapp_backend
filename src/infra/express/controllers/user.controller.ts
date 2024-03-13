@@ -36,15 +36,22 @@ export class UserController implements IUserController {
     };
 
     createGoogleUser = async (req: Request, res: Response) => {
-        const user: User | null = await this.UserService.createUser({
-            name: req.body.name,
-            password: req.body.password,
-            imageUrl: req.body.imageUrl,
-        });
 
-        if (!user) throw new ServiceError(404, 'fail to create user');
+        if (!(await this.UserService.getUserByNameAndPassword(req.body.name, req.body.password))) {
+            const user: User | null = await this.UserService.createGoogleUser({
+                name: req.body.name,
+                password: req.body.password,
+                fullPath: req.body.fullPath,
+            });
 
-        res.status(201).send(user);
+            if (!user) throw new ServiceError(404, 'fail to create user');
+        }
+
+        const userLoged: LoginUser | null = await this.UserService.login(req.body.name, req.body.password);
+
+        if (!userLoged) throw new ServiceError(404, 'fail to login');
+        else res.send(userLoged);
+
     };
 
     image = async (req: Request, res: Response) => {

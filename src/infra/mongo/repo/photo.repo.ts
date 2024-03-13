@@ -110,4 +110,10 @@ export class PhotoRepo extends BaseRepository<Photo> implements IPhotoDal {
 
         return photos;
     };
+
+    deleteUsersPhotos = async (userId: string): Promise<any> => {
+        const deletedPhotos = await this._model.deleteMany({ userId }).lean();
+
+        return deletedPhotos;
+    };
 }

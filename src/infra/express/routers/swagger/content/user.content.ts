@@ -18,6 +18,10 @@ export const userContent = {
                 type: 'string',
                 example: 'https://www.google.com/image.png',
             },
+            fullPath: {
+                type: 'string',
+                example: 'https://www.google.com/image.png',
+            },
             createdAt: {
                 type: 'string',
                 example: '2020-09-01T00:00:00.000Z',

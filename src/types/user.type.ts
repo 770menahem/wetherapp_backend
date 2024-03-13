@@ -2,7 +2,7 @@ type User = {
     _id?: string;
     name: string;
     imagePath?: string;
-    imageUrl?: string;
+    fullPath?: string;
     password?: string;
     createdAt?: Date;
     updatedAt?: Date;

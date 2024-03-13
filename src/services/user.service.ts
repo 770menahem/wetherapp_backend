@@ -8,16 +8,22 @@ import User from '../types/user.type';
 import { decrypt, encrypt } from '../utils/encrypt';
 import { NoTokenError, NotFoundError } from '../infra/express/utils/error';
 import { ITokenDal } from './interfaces/dal/tokenDal.interface';
+import { IPhotoDal } from './interfaces/dal/photoDal.interface';
+import { ICommentDal } from './interfaces/dal/commentDal.interface';
 
 export class UserService implements IUserService {
     private UserRepo: IUserDal;
     private Token: ITokenDal;
     private _logger: ILogger;
+    private PhotoRepo: IPhotoDal;
+    private CommentRepo: ICommentDal;
 
-    constructor(userRepo: IUserDal, logger: ILogger, token: ITokenDal) {
+    constructor(userRepo: IUserDal, logger: ILogger, token: ITokenDal, photoRepo: IPhotoDal, commentRepo: ICommentDal) {
         this.Token = token;
         this.UserRepo = userRepo;
         this._logger = logger;
+        this.PhotoRepo = photoRepo;
+        this.CommentRepo = commentRepo;
     }
 
     auth = async (token: string) => {
@@ -47,12 +53,26 @@ export class UserService implements IUserService {
         return newUser;
     };
 
+    createGoogleUser = async (user: User) => {
+        const newUser = await this.UserRepo.create({
+            name: user.name,
+            password: encrypt(user.password!),
+            fullPath: user.fullPath,
+        });
+
+        this._logger.logInfo({ message: 'User created successfully' });
+
+        return newUser;
+    };
+
     updateUser = async (userId: string, name: string) => {
         const user = await this.UserRepo.updateName(userId, name);
         return user;
     };
 
     deleteUser = async (userId: string) => {
+        await this.PhotoRepo.deleteUsersPhotos(userId);
+        await this.CommentRepo.deleteCoomentsByUserID(userId);
         const user = await this.UserRepo.delete(userId);
         return user;
     };

@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { createGoogleSchema, createSchema, updateSchema, logoutSchema } from '../../../services/dtos/user.schema';
+import { createSchema, updateSchema, logoutSchema, createGoogleSchema } from '../../../services/dtos/user.schema';
 import { IUserController } from '../controllers/userController.interface';
 
 import validateRequest from '../joi/joi';

@@ -85,7 +85,7 @@ export const userSwagger = {
                                 password: {
                                     type: 'string',
                                 },
-                                imageUrl: {
+                                fullPath: {
                                     type: 'string',
                                 },
                             },
